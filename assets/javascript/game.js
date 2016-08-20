@@ -3,6 +3,8 @@ var computerChoices = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l
 // Declares the tallies to 0
 var correct = 0;
 var wrong = 0;
+var wins = 0;
+var losses = 0;
 // When the user presses the key it records the keypress and then sets it to userguess
 document.onkeyup = function(event) {
 	var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
@@ -1315,14 +1317,29 @@ document.onkeyup = function(event) {
 			wrong++;
 		}
 		// Taking the tallies and displaying them in HTML
-		var html = "<h1>The Psychic Game!</h1> <p>Guess what letter I'm thinking of</p>" +
-		"<p>Correct Guesses: " +
-		wins +
+		var html = 	"<p>Correct Guesses: " +
+		correct +
 		"</p>" +
 		"<p>Wrong Guesses: " +
-		losses +
+		wrong +
 		"</p>";
 		// Placing the html into the game ID
 		document.querySelector('#game').innerHTML = html;
 	}
+	var counterHTML = "<p>Lost: " + losses + "</p>" +
+		"<p>Wins: " + wins + "</p>"
+
+	if(wrong == 10){
+		$("#game").empty();
+			alert('You loose!');
+		losses++;
+		document.querySelector('#counter').innerHTML = counterHTML;
+		}
+	if (correct == 1){
+		$("#game").empty();
+			alert('You win!');
+		wins++;
+		document.querySelector('#counter').innerHTML = counterHTML;
+	}
+
 }
